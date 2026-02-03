@@ -1,0 +1,192 @@
+.results-container {
+  background: transparent;
+}
+
+.results-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+}
+
+.result-item-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%) !important;
+  border: 1px solid #e3f2fd !important;
+  border-radius: 16px !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.result-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(13, 110, 253, 0.15) !important;
+  border-color: #0d6efd !important;
+}
+
+.result-item-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0d6efd, #6f42c1, #e83e8c);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.result-item-card:hover::before {
+  opacity: 1;
+}
+
+.ecli-label {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 1rem;
+  color: #0d6efd;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #0d6efd, #6f42c1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.similarity-badge {
+  background: linear-gradient(135deg, #28a745, #20c997) !important;
+  color: white !important;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+}
+
+.result-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #2c3e50;
+  text-align: justify;
+  padding: 1rem 0;
+  border-left: 4px solid #e9ecef;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  background: rgba(248, 249, 250, 0.5);
+  border-radius: 0 8px 8px 0;
+}
+
+.keyword-badge {
+  background: linear-gradient(135deg, #6f42c1, #e83e8c) !important;
+  color: white !important;
+  font-weight: 600;
+  margin: 0.2rem 0.3rem 0.2rem 0;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(111, 66, 193, 0.3);
+  transition: all 0.3s ease;
+}
+
+.keyword-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(111, 66, 193, 0.4);
+}
+
+.read-more-btn {
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, #17a2b8, #6f42c1);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.read-more-btn:hover {
+  background: linear-gradient(135deg, #6f42c1, #e83e8c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+}
+
+.result-stats {
+  background: rgba(13, 110, 253, 0.05);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(13, 110, 253, 0.1);
+}
+
+.accordion-button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  color: #0d6efd !important;
+  font-weight: 600 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #6f42c1 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230d6efd'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+}
+
+.no-results {
+  background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+  border: 2px dashed #dee2e6;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.no-results i {
+  font-size: 3rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+
+.similarity-badge {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background-color: #f8f9fa !important;
+  font-weight: 500;
+}
+
+.result-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4a5568 !important;
+  text-align: justify;
+}
+
+.keyword-pill {
+  font-weight: 500;
+  font-size: 0.75rem;
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+}
+
+/* Custom Accordion Chevron Styling */
+.btn-link {
+  text-decoration: none !important;
+  color: #a0aec0;
+}
+
+.btn-link:hover {
+  color: #2d3748;
+}
