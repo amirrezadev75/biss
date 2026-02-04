@@ -23,18 +23,44 @@ const NLForm = () => {
   
   const [db1Data, setDb1Data] = useState({
     query: "",
+    max_results: 5,
     articles: { 
-      applied: [""],
+      applied: [],
       violated: [],
-      non_violated: []
+      non_violated: [],
+      logic: "OR"
     },
-    advanced_settings: { language: "" }
+    keywords: [],
+    application_numbers: [],
+    advanced_settings: { 
+      start_date: "",
+      end_date: "",
+      language: "",
+      importance_level: "",
+      respondent_state: "",
+      degrees_sources: 0,
+      degrees_targets: 0
+    },
+    document_types: []
   });
 
   const [db2Data, setDb2Data] = useState({
     query: "",
-    articles: { applied: [] },
-    advanced_settings: { language: "" }
+    max_results: 5,
+    law_references: {
+      articles: [],
+      logic: "AND"
+    },
+    keywords: [],
+    instances: [],
+    domains: [],
+    advanced_settings: {
+      start_date: "",
+      end_date: "",
+      degrees_sources: 0,
+      degrees_targets: 0,
+      document_types: []
+    }
   });
 
   const handleUpdate = (path, value) => {
@@ -51,21 +77,37 @@ const NLForm = () => {
 
   const isFormIncomplete = () => {
     if (activeDb === 'DB1') {
-      // For General Search, only check query and article number
       const isQueryEmpty = !db1Data.query || db1Data.query.trim().length === 0;
-      const articleNum = db1Data.articles?.applied[0] || db1Data.articles?.violated[0] || db1Data.articles?.non_violated[0] || "";
-      const isArticleEmpty = !articleNum || articleNum.trim().length === 0;
-      return isQueryEmpty || isArticleEmpty;
-    } else {
-      const isQueryEmpty = !db2Data.query || db2Data.query.trim().length === 0;
-      const areArticlesEmpty = !db2Data.articles || db2Data.articles.applied.length === 0;
-      return isQueryEmpty || areArticlesEmpty;
+    
+      const hasViolatedArticles = db1Data.articles?.violated?.length > 0;
+      const hasAppliedArticles = db1Data.articles?.applied?.length > 0;
+      const hasNonViolatedArticles = db1Data.articles?.non_violated?.length > 0;
+      const areArticlesEmpty = !hasViolatedArticles && !hasAppliedArticles && !hasNonViolatedArticles;
+      
+      const isRespondentEmpty = !db1Data.advanced_settings?.respondent_state || db1Data.advanced_settings.respondent_state.trim().length === 0;
+      const isStartDateEmpty = !db1Data.advanced_settings?.start_date;
+      const isEndDateEmpty = !db1Data.advanced_settings?.end_date;
+      const isLanguageEmpty = !db1Data.advanced_settings?.language;
+      const isImportanceLevelEmpty = !db1Data.advanced_settings?.importance_level;
+      
+      const isMaxResultsEmpty = !db1Data.max_results || db1Data.max_results < 1;
+      const areDocTypesEmpty = !db1Data.document_types || db1Data.document_types.length === 0;
+      
+      return isQueryEmpty || areArticlesEmpty || isRespondentEmpty || 
+             isStartDateEmpty || isEndDateEmpty || isLanguageEmpty || 
+             isImportanceLevelEmpty || isMaxResultsEmpty || areDocTypesEmpty;
+    } else {  
+      const areInstancesEmpty = !db2Data.instances || db2Data.instances.length === 0;
+      const areDomainsEmpty = !db2Data.domains || db2Data.domains.length === 0;
+      const areDocTypesEmpty = !db2Data.advanced_settings?.document_types || db2Data.advanced_settings.document_types.length === 0;
+      const isMaxResultsEmpty = !db2Data.max_results || db2Data.max_results < 1;
+      
+      return areInstancesEmpty || areDomainsEmpty || areDocTypesEmpty || isMaxResultsEmpty;
     }
   };
 
   return (
     <div className="nl-container shadow-lg p-4 border rounded bg-white position-relative">
-      {/* Header Section */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div className="d-flex align-items-center">
           <i className="bi bi-pencil-square text-primary me-2"></i>
@@ -78,7 +120,7 @@ const NLForm = () => {
             className="fw-semibold"
           >
             <i className="bi bi-search me-1"></i>
-            Rechtspraak DB
+            ECHR Db
           </Button>
           <Button 
             variant={activeDb === 'DB2' ? 'primary' : 'outline-primary'} 
@@ -86,12 +128,11 @@ const NLForm = () => {
             className="fw-semibold"
           >
             <i className="bi bi-file-earmark-text me-1"></i>
-            ECHR Db
+            Rechtspraak DB
           </Button>
         </ButtonGroup>
       </div>
 
-      {/* Form Content */}
       <div className="sentence-box">
         {activeDb === 'DB1' ? (
           <ECHRForm data={db1Data} onUpdate={handleUpdate} />
