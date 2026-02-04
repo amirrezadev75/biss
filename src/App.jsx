@@ -12,7 +12,7 @@ function AppContent() {
     <div className="min-vh-100">
       {/* Header Section */}
       <div className="bg-white shadow-sm border-bottom mb-4">
-        <div className="container py-4">
+        <div className="container-fluid py-4">
           <div className="text-center">
             <h1 className="display-4 fw-bold text-primary mb-2">
               <i className="bi bi-scales me-3"></i>
@@ -27,7 +27,7 @@ function AppContent() {
       </div>
 
       {/* Main Content */}
-      <div className="container pb-5">
+      <div className="container-fluid pb-5 px-4">
         {searchState.loading && (
           <div className="text-center mt-5">
             <div className="spinner-border text-primary" role="status" style={{width: '3rem', height: '3rem'}}>
