@@ -1,7 +1,8 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import NLForm from './components/NlForm/NlForm';
 import AIRecommendations from './components/AiRecommendations/AiRecommendations';
-import ResultsView from './components/Resultsview/ResultView';
+import ResultsView from './components/ResultsView/ResultsView';
 import { SearchProvider, useSearch } from './context/SearchContext';
 
 function AppContent() {
@@ -27,13 +28,6 @@ function AppContent() {
 
       {/* Main Content */}
       <div className="container pb-5">
-        {/* 1. The Form Switcher Component */}
-        <div className="row justify-content-center mb-4">
-          <div className="col-lg-10">
-            <NLForm />
-          </div>
-        </div>
-
         {searchState.loading && (
           <div className="text-center mt-5">
             <div className="spinner-border text-primary" role="status" style={{width: '3rem', height: '3rem'}}>
@@ -46,19 +40,31 @@ function AppContent() {
           </div>
         )}
 
-        {searchState.hasSearched && !searchState.loading && (
-          <div className="mt-5 fade-in">
-            <div className="row g-4">
-              <div className="col-lg-4">
+        {/* Single row layout */}
+        {!searchState.loading && (
+          <>
+            {/* Form and AI Recommendations side by side */}
+            <Row className="g-4 mb-4">
+              <Col sm={8} style={{border: '2px solid red', backgroundColor: 'rgba(255,0,0,0.1)'}}>
+                {/* 1. The Form Switcher Component */}
+                <NLForm />
+              </Col>
+              <Col sm={4} style={{border: '2px solid blue', backgroundColor: 'rgba(0,0,255,0.1)'}}>
                 {/* 2. The AI Suggestion Component */}
                 <AIRecommendations />
-              </div>
-              <div className="col-lg-8">
-                {/* 3. The Result List Component */}
-                <ResultsView />
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+
+            {/* Results View - appears after search */}
+            {searchState.hasSearched && (
+              <Row>
+                <Col>
+                  {/* 3. The Result List Component */}
+                  <ResultsView />
+                </Col>
+              </Row>
+            )}
+          </>
         )}
       </div>
     </div>

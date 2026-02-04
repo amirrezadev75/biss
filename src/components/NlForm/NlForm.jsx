@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import ECHRForm from './ECHRForm';
 import RechtspraakForm from './RechtspraakForm';
 import { useSearch } from '../../context/SearchContext';
@@ -23,9 +23,12 @@ const NLForm = () => {
   
   const [db1Data, setDb1Data] = useState({
     query: "",
-    respondent_state: "",
-    document_types: ["HEJUD"],
-    advanced_settings: { start_date: "1900-01-01", end_date: "2026-02-03" }
+    articles: { 
+      applied: [""],
+      violated: [],
+      non_violated: []
+    },
+    advanced_settings: { language: "" }
   });
 
   const [db2Data, setDb2Data] = useState({
@@ -48,14 +51,20 @@ const NLForm = () => {
 
   const isFormIncomplete = () => {
     if (activeDb === 'DB1') {
-      return !db1Data.query || !db1Data.respondent_state;
+      // For General Search, only check query and article number
+      const isQueryEmpty = !db1Data.query || db1Data.query.trim().length === 0;
+      const articleNum = db1Data.articles?.applied[0] || db1Data.articles?.violated[0] || db1Data.articles?.non_violated[0] || "";
+      const isArticleEmpty = !articleNum || articleNum.trim().length === 0;
+      return isQueryEmpty || isArticleEmpty;
     } else {
-      return !db2Data.query || db2Data.articles.applied.length === 0;
+      const isQueryEmpty = !db2Data.query || db2Data.query.trim().length === 0;
+      const areArticlesEmpty = !db2Data.articles || db2Data.articles.applied.length === 0;
+      return isQueryEmpty || areArticlesEmpty;
     }
   };
 
   return (
-    <Container className="nl-container shadow-lg p-4 border rounded bg-white position-relative">
+    <div className="nl-container shadow-lg p-4 border rounded bg-white position-relative">
       {/* Header Section */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div className="d-flex align-items-center">
@@ -117,7 +126,7 @@ const NLForm = () => {
           </small>
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 
