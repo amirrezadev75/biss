@@ -40,26 +40,21 @@ function AppContent() {
           </div>
         )}
 
-        {/* Single row layout */}
         {!searchState.loading && (
           <>
-            {/* Form and AI Recommendations side by side */}
             <Row className="g-4 mb-4">
               <Col sm={8} style={{border: '2px solid red', backgroundColor: 'rgba(255,0,0,0.1)'}}>
-                {/* 1. The Form Switcher Component */}
                 <NLForm />
               </Col>
               <Col sm={4} style={{border: '2px solid blue', backgroundColor: 'rgba(0,0,255,0.1)'}}>
-                {/* 2. The AI Suggestion Component */}
                 <AIRecommendations />
               </Col>
             </Row>
 
-            {/* Results View - appears after search */}
+
             {searchState.hasSearched && (
               <Row>
                 <Col>
-                  {/* 3. The Result List Component */}
                   <ResultsView />
                 </Col>
               </Row>

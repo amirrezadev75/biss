@@ -7,6 +7,26 @@ const AIRecommendations = () => {
   const { searchState } = useSearch();
   const { aiTips: suggestions, hasSearched } = searchState;
 
+  // Dummy AI recommendations data
+  const dummyRecommendations = [
+    {
+      query: "human rights violation discrimination",
+      reasoning: "Your search indicates interest in fundamental rights. This refinement could reveal cases with similar constitutional issues."
+    },
+    {
+      query: "procedural fairness article 6 ECHR",
+      reasoning: "Based on your narrative, exploring procedural safeguards might uncover relevant precedents in legal proceedings."
+    },
+    {
+      query: "proportionality test legal reasoning",
+      reasoning: "Courts often apply proportionality analysis. This search could reveal judicial reasoning patterns relevant to your case."
+    }
+  ];
+
+  const displaySuggestions = (hasSearched && (!suggestions || suggestions.length === 0)) 
+    ? dummyRecommendations 
+    : suggestions;
+
   return (
     <Card className="ai-recommendation-card border-0 shadow-lg mb-4 h-100">
       <Card.Header className="bg-transparent border-0 pt-4 pb-3 d-flex align-items-center">
@@ -29,14 +49,14 @@ const AIRecommendations = () => {
           </div>
         ) : (
           <>
-            {suggestions && suggestions.length > 0 ? (
+            {displaySuggestions && displaySuggestions.length > 0 ? (
               <>
                 <p className="small text-muted mb-4">
                   <i className="bi bi-lightbulb me-2"></i>
                   Based on your narrative, you might find these perspectives useful:
                 </p>
                 <div className="suggestions-list">
-                  {suggestions.map((item, idx) => (
+                  {displaySuggestions.map((item, idx) => (
                     <div key={idx} className="suggestion-item p-3 mb-3 position-relative">
                       <div className="d-flex justify-content-between align-items-start mb-2">
                         <Button 
