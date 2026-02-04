@@ -78,7 +78,7 @@ const NLForm = () => {
             className="fw-semibold"
           >
             <i className="bi bi-search me-1"></i>
-            General Search
+            Rechtspraak DB
           </Button>
           <Button 
             variant={activeDb === 'DB2' ? 'primary' : 'outline-primary'} 
@@ -86,7 +86,7 @@ const NLForm = () => {
             className="fw-semibold"
           >
             <i className="bi bi-file-earmark-text me-1"></i>
-            Article Violation
+            ECHR Db
           </Button>
         </ButtonGroup>
       </div>
